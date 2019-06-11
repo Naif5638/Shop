@@ -7,7 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{BDFF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{104E9A53-A2ED-4E24-B80C-2B1DBF0AA044}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Common", "Shop.Common\Shop.Common.csproj", "{5C216B5B-BEB5-4FAA-852A-DDAF01094D69}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C216B5B-BEB5-4FAA-852A-DDAF01094D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C216B5B-BEB5-4FAA-852A-DDAF01094D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C216B5B-BEB5-4FAA-852A-DDAF01094D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C216B5B-BEB5-4FAA-852A-DDAF01094D69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
