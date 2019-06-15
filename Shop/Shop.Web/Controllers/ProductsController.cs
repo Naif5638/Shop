@@ -6,6 +6,7 @@ using Shop.Web.Helpers;
 using Shop.Web.Models;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.Web.Controllers
@@ -24,7 +25,7 @@ namespace Shop.Web.Controllers
         // GET: Products
         public IActionResult Index()
         {
-            return View(this.productRepository.GetAll());
+            return View(this.productRepository.GetAll().OrderBy(p => p.Name));
         }
 
         // GET: Products/Details/5
@@ -71,7 +72,7 @@ namespace Shop.Web.Controllers
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/ {view.ImageFile.FileName}";
+                    path = $"~/images/Products/{view.ImageFile.FileName}";
                 }
 
                 var product = this.ToProduct(view, path);
@@ -155,7 +156,7 @@ namespace Shop.Web.Controllers
                             await view.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/ {view.ImageFile.FileName}";
+                        path = $"~/images/Products/{view.ImageFile.FileName}";
                     }
 
                     var product = this.ToProduct(view, path);
