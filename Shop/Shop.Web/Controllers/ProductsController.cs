@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data;
 using Shop.Web.Data.Entities;
@@ -26,6 +26,7 @@ namespace Shop.Web.Controllers
         public IActionResult Index()
         {
             return View(this.productRepository.GetAll().OrderBy(p => p.Name));
+
         }
 
         // GET: Products/Details/5
@@ -36,7 +37,8 @@ namespace Shop.Web.Controllers
                 return NotFound();
             }
 
-            var product = await this.productRepository.GetByIdAsync(id.Value);
+var product = await this.productRepository.GetByIdAsync(id.Value);
+
             if (product == null)
             {
                 return NotFound();
@@ -107,7 +109,6 @@ namespace Shop.Web.Controllers
             {
                 return NotFound();
             }
-
             var product = await this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
@@ -167,6 +168,7 @@ namespace Shop.Web.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (await this.productRepository.ExistAsync(view.Id))
+
                     {
                         return NotFound();
                     }
@@ -178,6 +180,7 @@ namespace Shop.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(view);
+
         }
 
         // GET: Products/Delete/5
@@ -189,6 +192,7 @@ namespace Shop.Web.Controllers
             }
 
             var product = await this.productRepository.GetByIdAsync(id.Value);
+
             if (product == null)
             {
                 return NotFound();
@@ -206,5 +210,6 @@ namespace Shop.Web.Controllers
             await this.productRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
