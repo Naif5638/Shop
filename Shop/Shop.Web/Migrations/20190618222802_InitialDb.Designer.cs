@@ -10,14 +10,14 @@ using Shop.Web.Data;
 namespace Shop.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190613203811_Countries")]
-    partial class Countries
+    [Migration("20190618222802_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
