@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data.Entities;
 using System;
@@ -17,5 +17,4 @@ namespace Shop.Web.Data
         {
         }
     }
-
 }
