@@ -1,4 +1,4 @@
-﻿@model Shop.Web.Data.Entities.Product
+@model Shop.Web.Data.Entities.Product
 
 @{
     ViewData["Title"] = "Details";
@@ -26,7 +26,10 @@
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Url.Content(Model.ImageUrl)" alt="Image" class"img-fluid mx-auto" />
+            }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.LastPurchase)
@@ -41,10 +44,10 @@
             @Html.DisplayFor(model => model.LastSale)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IsAviable)
+            @Html.DisplayNameFor(model => model.IsAvailabe)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IsAviable)
+            @Html.DisplayFor(model => model.IsAvailabe)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Stock)
@@ -55,6 +58,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
