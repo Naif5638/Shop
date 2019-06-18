@@ -1,5 +1,4 @@
-﻿using Shop.UIForms.Views;
-using System;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +10,7 @@ namespace Shop.UIForms
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
