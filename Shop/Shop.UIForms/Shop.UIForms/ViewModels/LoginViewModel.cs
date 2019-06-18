@@ -35,7 +35,7 @@ namespace Shop.UIForms.ViewModels
             }
             await Application.Current.MainPage.DisplayAlert(
                 "Ok",
-                "Fuck yeah!!!",
+                "Joder Me esta gustando!!!",
                 "Accept");
 
         }
