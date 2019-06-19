@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Web.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
