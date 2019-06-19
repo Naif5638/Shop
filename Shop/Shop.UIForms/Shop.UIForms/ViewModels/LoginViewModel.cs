@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Shop.UIForms.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,11 @@ namespace Shop.UIForms.ViewModels
 
         public ICommand LoginCommand => new RelayCommand(Login);
 
+        public LoginViewModel()
+        {
+            this.Email = "jonathanlc165@gmail.com";
+            this.Password = "123456";
+        }
         private async void Login()
         {
             if (string.IsNullOrEmpty(this.Email))
@@ -33,10 +39,21 @@ namespace Shop.UIForms.ViewModels
                     "Accept");
                 return;
             }
-            await Application.Current.MainPage.DisplayAlert(
-                "Ok",
-                "Fuck yeah!!!",
-                "Accept");
+            if (!this.Email.Equals("jonathanlc165@gmail.com") || !this.Password.Equals("123456"))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "User o password wrong.",
+                    "Accept");
+                return;
+            }
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Ok",
+            //    "Joder Me esta gustando!!!",
+            //    "Accept");
+
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
 
         }
     }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Web.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
@@ -66,15 +68,18 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
 
                 if (view.ImageFile != null && view.ImageFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+
                     path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products", 
-                        view.ImageFile.FileName);
+                        file);
 
                     using(var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{view.ImageFile.FileName}";
+                    path = $"~/images/Products/{file}";
                 }
 
                 var product = this.ToProduct(view, path);
@@ -149,15 +154,18 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
 
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+
                         path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products",
-                            view.ImageFile.FileName);
+                            file);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await view.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/{view.ImageFile.FileName}";
+                        path = $"~/images/Products/{file}";
                     }
 
                     var product = this.ToProduct(view, path);
