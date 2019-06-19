@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Shop.UIForms.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,10 +47,13 @@ namespace Shop.UIForms.ViewModels
                     "Accept");
                 return;
             }
-            await Application.Current.MainPage.DisplayAlert(
-                "Ok",
-                "Joder Me esta gustando!!!",
-                "Accept");
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Ok",
+            //    "Joder Me esta gustando!!!",
+            //    "Accept");
+
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
 
         }
     }
