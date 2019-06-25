@@ -36,14 +36,14 @@ namespace Shop.Web.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ProductNotFound");
             }
 
-var product = await this.productRepository.GetByIdAsync(id.Value);
+            var product = await this.productRepository.GetByIdAsync(id.Value);
 
             if (product == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ProductNotFound");
             }
 
             return View(product);
@@ -71,10 +71,10 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
                     var guid = Guid.NewGuid().ToString();
                     var file = $"{guid}.jpg";
 
-                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products", 
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products",
                         file);
 
-                    using(var stream = new FileStream(path, FileMode.Create))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
@@ -111,12 +111,12 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ProductNotFound");
             }
             var product = await this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("ProductNotFound");
             }
             var view = this.ToProductViewModel(product);
             return View(view);
@@ -215,6 +215,11 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
             var product = await this.productRepository.GetByIdAsync(id);
             await this.productRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ProductNotFound()
+        {
+            return this.View();
         }
 
     }
