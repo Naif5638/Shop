@@ -10,13 +10,16 @@ namespace Shop.Web.Helpers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> singnInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public UserHelper(
             UserManager<User> userManager,
-            SignInManager<User> singnInManager)
+            SignInManager<User> singnInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.singnInManager = singnInManager;
+            this.roleManager = roleManager;
         }
         public async Task<IdentityResult> AddUserAsync(User user, string password)
         {
@@ -41,5 +44,29 @@ namespace Shop.Web.Helpers
         {
             await this.singnInManager.SignOutAsync();
         }
+
+        public async Task CheckRoleAsync(string roleName)
+        {
+            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                await this.roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = roleName
+                });
+            }
+
+        }
+
+        public async Task AddUserToRoleAsync(User user, string roleName)
+        {
+            await this.userManager.AddToRoleAsync(user, roleName);
+        }
+
+        public async Task<bool> IsUserInRoleAsync(User user, string roleName)
+        {
+            return await this.userManager.IsInRoleAsync(user, roleName);
+        }
+
     }
 }

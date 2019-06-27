@@ -14,5 +14,9 @@ namespace Shop.Web.Helpers
         Task<IdentityResult> AddUserAsync(User user, string password);
         Task<SignInResult> LoginAsync(LoginViewModel model);
         Task LogoutAsync();
+        Task CheckRoleAsync(string roleName);
+        Task AddUserToRoleAsync(User user, string roleName);
+        Task<bool> IsUserInRoleAsync(User user, string roleName);
+
     }
 }
