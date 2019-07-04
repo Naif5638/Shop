@@ -58,7 +58,7 @@ namespace Shop.Web.Controllers
 
         public async Task<IActionResult> DeleteItem(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -98,6 +98,40 @@ namespace Shop.Web.Controllers
             }
 
             return this.RedirectToAction("Create");
+        }
+
+        public async Task<IActionResult> Deliver(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await this.orderRepository.GetOrdersAsync(id.Value);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var model = new DeliverViewModel
+            {
+                Id = order.Id,
+                DeliveryDate = DateTime.Today
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Deliver(DeliverViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            await this.orderRepository.DeliverOrder(model);
+            return this.RedirectToAction("Index");
         }
     }
 
