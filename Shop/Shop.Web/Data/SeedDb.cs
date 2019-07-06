@@ -28,9 +28,25 @@ namespace Shop.Web.Data
             await this.userHelper.CheckRoleAsync("Admin");
             await this.userHelper.CheckRoleAsync("Customer");
 
+            //Add City
+            if (!this.context.Countries.Any())
+            {
+                var cities = new List<City>();
+                cities.Add(new City { Name = "San Juan de la Maguana" });
+                cities.Add(new City { Name = "Santo Domingo" });
+                cities.Add(new City { Name = "Las Matas de Farfan" });
+
+                this.context.Countries.Add(new Country
+                {
+                    Cities = cities,
+                    Name = "Dominican Republic"
+                });
+                await this.context.SaveChangesAsync();
+            }
+
             //Add User
             var user = await this.userHelper.GetUserByEmailAsync("jonathanlc165@gmail.com");
-            if(user == null)
+            if (user == null)
             {
                 user = new User
                 {
@@ -38,19 +54,27 @@ namespace Shop.Web.Data
                     LastName = "Lorenzo Contrera",
                     Email = "jonathanlc165@gmail.com",
                     UserName = "jonathanlc165@gmail.com",
-                    PhoneNumber = "8092329335"
+                    PhoneNumber = "8092329335",
+                    Address = "Calle Respaldo Eugenio Maria de Hosto #36",
+                    CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
+                    City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
                 };
 
                 var result = await this.userHelper.AddUserAsync(user, "123456");
-                if(result != IdentityResult.Success)
+                if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
-                var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
-                if (!isInRole)
-                {
-                    await this.userHelper.AddUserToRoleAsync(user, "Admin");
-                }
+
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
+                var token = await this.userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await this.userHelper.ConfirmEmailAsync(user, token);
+            }
+
+            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
+            if (!isInRole)
+            {
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
             //Add Product
