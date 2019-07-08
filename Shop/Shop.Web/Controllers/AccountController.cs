@@ -223,5 +223,62 @@ namespace Shop.Web.Controllers
             return this.View();
         }
 
+        public IActionResult RecoverPassword()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userHelper.GetUserByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The email doesn't correspont to a register user.");
+                    return this.View(model);
+                }
+
+                var myToken = await this.userHelper.GeneratePasswordResetTokenAsync(user);
+                var link = this.Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
+                var mailSender = new MailHelper(configuration);
+                mailSender.SendMail(model.Email, "Shop Password Reset", $"<h1>Shop Recover Password</h1>" +
+                    $"To reset the password click in this link:<br></br>" +
+                    $"<a href=\"{link}\">Reset Password</a>");
+                this.ViewBag.Message = "The instructiones to recover your password has been sent to email.";
+                //TODO: Se debe Agregar un sms donde se verifique que se envio el mensaje para recuperar la contraseña
+                return this.View();
+            }
+
+            return this.View();
+        }
+
+        public IActionResult ResetPassword(string token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var user = await this.userHelper.GetUserByEmailAsync(model.UserName);
+            if (user != null)
+            {
+                var result = await this.userHelper.ResetPasswordAsync(user, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    this.ViewBag.Message = "Password reset successful.";
+                    //TODO: se debe agregar un mensaje modal que confirme que se cambio la contraseña exitosamente.
+                    return this.View();
+                }
+
+                this.ViewBag.Message = "Error while resetting the password.";
+                return View(model);
+            }
+
+            this.ViewBag.Message = "User not found.";
+            return View(model);
+        }
     }
 }
