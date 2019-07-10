@@ -24,6 +24,11 @@ namespace Shop.Web.Helpers
         Task<User> GetUserByIdAsync(string userId);
         Task<string> GeneratePasswordResetTokenAsync(User user);
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
+        Task<List<User>> GetAllUsersAsync();
+
+        Task RemoveUserFromRoleAsync(User user, string roleName);
+
+        Task DeleteUserAsync(User user);
 
 
     }
