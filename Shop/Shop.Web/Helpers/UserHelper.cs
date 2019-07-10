@@ -43,6 +43,14 @@ namespace Shop.Web.Helpers
                 false);
         }
 
+        public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
+        {
+            return await this.singnInManager.CheckPasswordSignInAsync(
+                user,
+                password,
+                false);
+        }
+
         public async Task LogoutAsync()
         {
             await this.singnInManager.SignOutAsync();

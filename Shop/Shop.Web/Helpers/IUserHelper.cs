@@ -13,6 +13,7 @@ namespace Shop.Web.Helpers
         Task<User> GetUserByEmailAsync(string email);
         Task<IdentityResult> AddUserAsync(User user, string password);
         Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task<SignInResult> ValidatePasswordAsync(User user, string password);
         Task LogoutAsync();
         Task CheckRoleAsync(string roleName);
         Task AddUserToRoleAsync(User user, string roleName);
@@ -25,9 +26,7 @@ namespace Shop.Web.Helpers
         Task<string> GeneratePasswordResetTokenAsync(User user);
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
         Task<List<User>> GetAllUsersAsync();
-
         Task RemoveUserFromRoleAsync(User user, string roleName);
-
         Task DeleteUserAsync(User user);
 
 

@@ -11,6 +11,10 @@
         <ResourceDictionary>
             <!--Locator-->
             <infra:InstanceLocator x:Key="Locator"/>
+            
+            <!--Parameter-->
+            <x:String x:Key="UrlAPI">https://shopwebprueba.azurewebsites.net</x:String>
+          
         </ResourceDictionary>
     </Application.Resources>
 </Application>
