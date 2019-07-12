@@ -82,7 +82,9 @@ namespace Shop.UIForms.ViewModels
 
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Email or password incorrect.", "Accept");
+                await Application.Current.MainPage.DisplayAlert("Error"
+                    , "Email or password incorrect."
+                    , "Accept");
                 return;
             }
 
@@ -90,8 +92,9 @@ namespace Shop.UIForms.ViewModels
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = token;
             mainViewModel.Products = new ProductsViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
+            Application.Current.MainPage = new MasterPage();
         }
+
 
     }
 }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Shop.UIForms.Views.MenuPage"
+             BackgroundColor="BlueViolet"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Menu">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="10">
+            <Image
+                HeightRequest="150"
+                Source="Shop">              
+            </Image>
+            <ListView
+                BackgroundColor="Transparent"
+                ItemsSource="{Binding Menus}"
+                HasUnevenRows="True"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    HeightRequest="50"
+                                    Source="{Binding Icon}"
+                                    WidthRequest="50">
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label TextColor="White"
+                   Text="Menu"                
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
