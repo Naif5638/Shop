@@ -6,10 +6,20 @@
 
 <h2>Details</h2>
 
-<div>
+<div style="background-color:cornflowerblue;width:20%">
+
+</div>
+
+<div class="body-content" style="width:60%">
     <h4>Product</h4>
     <hr />
-    <div class="col-md-4">
+    <div>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="position:absolute; display:block;width:auto;height:250px;max-width:100%;"/>
+        }
+    </div>
+    <div style="display:block; float:left; margin-left:130px; margin-top:40px">
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -49,14 +59,13 @@
             </dd>
         </dl>
     </div>
+
+    <div style="display:block;float:initial;margin-top:220px">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning" style="margin-left:240px">Edit</a>
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
 </div>
-<div class="col-md-4">
-    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-    {
-        <img src="@Url.Content(Model.ImageUrl)" alt="Image" class"img-thumbnail" />
-    }
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fa fa-edit"></i>Edit</a>
-    <a asp-action="Index" class="btn btn-success"><i class="fa fa-arrow-alt-circle-left"></i>Back to List</a>
+
+<div style="background-color:greenyellow; width:20%">
+
 </div>

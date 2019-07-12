@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data.Entities;
 using Shop.Web.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.Web.Helpers
@@ -21,32 +24,9 @@ namespace Shop.Web.Helpers
             this.singnInManager = singnInManager;
             this.roleManager = roleManager;
         }
-
-        public async Task AddUserToRoleAsync(User user, string roleName)
-        {
-            await this.userManager.AddToRoleAsync(user, roleName);
-        }
-
         public async Task<IdentityResult> AddUserAsync(User user, string password)
         {
             return await this.userManager.CreateAsync(user, password);
-        }
-
-        public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
-        {
-            return await this.userManager.ChangePasswordAsync(user, oldPassword, newPassword);
-        }
-
-        public async Task CheckRoleAsync(string roleName)
-        {
-            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
-            if (!roleExists)
-            {
-                await this.roleManager.CreateAsync(new IdentityRole
-                {
-                    Name = roleName
-                });
-            }
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
@@ -63,16 +43,6 @@ namespace Shop.Web.Helpers
                 false);
         }
 
-        public async Task LogoutAsync()
-        {
-            await this.singnInManager.SignOutAsync();
-        }
-
-        public async Task<IdentityResult> UpdateUserAsync(User user)
-        {
-            return await this.userManager.UpdateAsync(user);
-        }
-
         public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
         {
             return await this.singnInManager.CheckPasswordSignInAsync(
@@ -81,9 +51,86 @@ namespace Shop.Web.Helpers
                 false);
         }
 
+        public async Task LogoutAsync()
+        {
+            await this.singnInManager.SignOutAsync();
+        }
+
+        public async Task CheckRoleAsync(string roleName)
+        {
+            var roleExists = await this.roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                await this.roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = roleName
+                });
+            }
+
+        }
+
+        public async Task AddUserToRoleAsync(User user, string roleName)
+        {
+            await this.userManager.AddToRoleAsync(user, roleName);
+        }
+
         public async Task<bool> IsUserInRoleAsync(User user, string roleName)
         {
             return await this.userManager.IsInRoleAsync(user, roleName);
         }
+        public async Task<IdentityResult> UpdateUserAsync(User user)
+        {
+            return await this.userManager.UpdateAsync(user);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
+        {
+            return await this.userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await this.userManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await this.userManager.FindByIdAsync(userId);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            return await this.userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string password)
+        {
+            return await this.userManager.ResetPasswordAsync(user, token, password);
+        }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await this.userManager.Users
+                .Include(u => u.City)
+                .OrderBy(u => u.FirstName)
+                .ThenBy(u => u.LastName)
+                .ToListAsync();
+        }
+
+        public async Task RemoveUserFromRoleAsync(User user, string roleName)
+        {
+            await this.userManager.RemoveFromRoleAsync(user, roleName);
+        }
+
+        public async Task DeleteUserAsync(User user)
+        {
+            await this.userManager.DeleteAsync(user);
+        }
+
     }
 }

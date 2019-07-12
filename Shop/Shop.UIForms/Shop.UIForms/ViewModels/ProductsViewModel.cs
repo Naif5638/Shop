@@ -33,13 +33,15 @@ namespace Shop.UIForms.ViewModels
         {
             this.IsRefreshing = true;
 
+            var url = Application.Current.Resources["UrlAPI"].ToString();
             var response = await this.apiService.GetListAsync<Product>(
-                "https://shopnaif.azurewebsites.net",
+                url,
                 "/api",
-                "/Products");
+                "/Products",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
 
             this.IsRefreshing = false;
-
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
