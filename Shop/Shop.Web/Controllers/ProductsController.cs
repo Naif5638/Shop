@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Shop.Web.Controllers
 {
-    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;
@@ -39,7 +38,7 @@ namespace Shop.Web.Controllers
                 return NotFound();
             }
 
-var product = await this.productRepository.GetByIdAsync(id.Value);
+            var product = await this.productRepository.GetByIdAsync(id.Value);
 
             if (product == null)
             {
@@ -49,7 +48,9 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
             return View(product);
         }
 
+
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -71,10 +72,10 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
                     var guid = Guid.NewGuid().ToString();
                     var file = $"{guid}.jpg";
 
-                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products", 
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Products",
                         file);
 
-                    using(var stream = new FileStream(path, FileMode.Create))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
@@ -106,7 +107,9 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
             };
         }
 
+
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -189,7 +192,9 @@ var product = await this.productRepository.GetByIdAsync(id.Value);
 
         }
 
+
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
