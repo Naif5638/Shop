@@ -41,18 +41,20 @@ namespace Shop.UIForms.ViewModels
                 "bearer",
                 MainViewModel.GetInstance().Token.Token);
 
-            this.IsRefreshing = false;
+            //this.IsRefreshing = false;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     response.Message,
                     "Acept");
+                this.IsRefreshing = false;
                 return;
             }
 
-            var myProducts = (List<Product>)response.Result;
-            this.Products = new ObservableCollection<Product>(myProducts);
+            var products = (List<Product>)response.Result;
+            this.Products = new ObservableCollection<Product>(products);
+            this.IsRefreshing = false;
         }
     }
 }

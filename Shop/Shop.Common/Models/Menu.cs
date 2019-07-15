@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shop.Common.Models
 {
-    class Menu
+    public class Menu
     {
         public string Icon { get; set; }
         public string Title { get; set; }

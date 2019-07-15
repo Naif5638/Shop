@@ -9,35 +9,42 @@
              Title="Login">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding Login}">            
+            BindingContext="{Binding Login}">
             <StackLayout 
                 Padding="8">
+                <Image
+                	HeightRequest="150"
+                	Source="shop">
+                </Image>
                 <Label 
-                    Text="Email">                    
+                    Text="Email">
                 </Label>
                 <Entry
                     Keyboard="Email"
                     Placeholder="Enter your Email..."
-                    Text="{Binding Email}">                    
+                    Text="{Binding Email}">
                 </Entry>
                 <Label
-                    Text="Password">                    
+                    Text="Password">
                 </Label>
                 <Entry
                     IsPassword="True"
                     Placeholder="Enter your password.."
-                    Text="{Binding Password}">                    
+                    Text="{Binding Password}">
                 </Entry>
                 <ActivityIndicator
-                	IsRunning="{Binding IsRunning}">
+                	IsRunning="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
                 <Button
-                    Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    Text="Login">                    
+                	BackgroundColor="Navy"
+                	BorderRadius="23"
+                	Command="{Binding LoginCommand}"
+                	HeightRequest="46"
+                	IsEnabled="{Binding IsEnabled}"
+                	Text="Login"
+                	TextColor="White">
                 </Button>
-                
-                    
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

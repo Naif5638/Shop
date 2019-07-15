@@ -96,10 +96,10 @@ namespace Shop.Common.Services
         }
 
         public async Task<Response> GetTokenAsync(
-    string urlBase,
-    string servicePrefix,
-    string controller,
-    TokenRequest request)
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            TokenRequest request)
         {
             try
             {
