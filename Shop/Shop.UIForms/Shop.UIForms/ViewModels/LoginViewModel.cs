@@ -19,6 +19,7 @@ namespace Shop.UIForms.ViewModels
         public string Email { get; set; }
         public string Password { get; set; }
 
+        
         public bool IsRunning
         {
             get => this.isRunning;
@@ -82,7 +83,8 @@ namespace Shop.UIForms.ViewModels
 
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error"
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error"
                     , "Email or password incorrect."
                     , "Accept");
                 return;
@@ -90,8 +92,10 @@ namespace Shop.UIForms.ViewModels
 
             var token = (TokenResponse)response.Result;
             var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.UserEmail = this.Email;
+            mainViewModel.UserPassword = this.Password;
             mainViewModel.Token = token;
-            mainViewModel.Products = new ProductsViewModel();
+            mainViewModel.Products = new ProductsViewModel();            
             Application.Current.MainPage = new MasterPage();
         }
 

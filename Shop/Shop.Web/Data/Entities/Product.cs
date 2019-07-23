@@ -45,7 +45,7 @@ namespace Shop.Web.Data.Entities
                     return null;
                 }
 
-                return $"https://shopnaif.azurewebsites.net{this.ImageUrl.Substring(1)}";
+                return $"https://ShopWebPrueba.AzureWebSites.net{this.ImageUrl.Substring(1)}";
             }
         }
     }
