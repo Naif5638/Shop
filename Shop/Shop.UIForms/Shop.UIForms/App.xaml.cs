@@ -1,4 +1,7 @@
-﻿using Shop.UIForms.ViewModels;
+﻿using Newtonsoft.Json;
+using Shop.Common.Helpers;
+using Shop.Common.Models;
+using Shop.UIForms.ViewModels;
 using Shop.UIForms.Views;
 using System;
 using Xamarin.Forms;
@@ -15,6 +18,25 @@ namespace Shop.UIForms
         {
             InitializeComponent();
 
+            if (Settings.IsRemember)
+            {
+                //INFO: Se deserializa a tipo json el string almacenado en settings en la constante token
+                var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+                //INFO: Se verifica que la fecha de expiracion del token sea mayor a la fecha actual
+                if (token.Expiration > DateTime.Now)
+                {
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Token = token;
+                    mainViewModel.UserEmail = Settings.UserEmail;
+                    mainViewModel.UserPassword = Settings.UserPassword;
+                    mainViewModel.Products = new ProductsViewModel();
+                    this.MainPage = new MasterPage();
+                    return;
+                }
+            }
+
+            //INFO: se coloca la pagina de inicio la la aplicación
             MainViewModel.GetInstance().Login = new LoginViewModel();
             this.MainPage = new NavigationPage(new LoginPage());
         }
