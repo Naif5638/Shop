@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Shop.Common.Models;
 using Shop.Common.Services;
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,8 +14,16 @@ namespace Shop.UIForms.ViewModels
         private bool isRunning;
         private bool isEnabled;
         private readonly ApiService apiService;
+        private MediaFile file;
 
-        public string Image { get; set; }
+        private ImageSource imageSource;
+
+        public ImageSource ImageSource
+        {
+            get => this.imageSource;
+            set => this.SetValue(ref this.imageSource, value);
+        }
+
 
         public bool IsRunning
         {
@@ -31,11 +42,56 @@ namespace Shop.UIForms.ViewModels
         public string Price { get; set; }
 
         public ICommand SaveCommand => new RelayCommand(this.Save);
+        public ICommand ChangeImageCommand => new RelayCommand(this.ChangeImage);
+
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                "Where do you take the picture?",
+                "Cancel",
+                null,
+                "From Gallery",
+                "From Camera");
+
+            if (source == "Cancel")
+            {
+                this.file = null;
+                return;
+            }
+
+            if (source == "From Camera")
+            {
+                this.file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
+        }
+
 
         public AddProductViewModel()
         {
             this.apiService = new ApiService();
-            this.Image = "noImage";
+            this.ImageSource = "noImage";
             this.IsEnabled = true;
         }
 
