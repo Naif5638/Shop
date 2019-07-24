@@ -35,5 +35,19 @@ namespace Shop.UIForms.Helpers
         public static string PasswordPlaceHolder => Resource.PasswordPlaceHolder;
 
         public static string RememberDevice => Resource.RememberDevice;
+
+        public static string Cancel => Resource.Cancel;
+
+        public static string FromGallery => Resource.FromGallery;
+
+        public static string FromCamera => Resource.FromCamera;
+
+        public static string TakePhoto => Resource.TakePhoto;
+
+        public static string ErrorPrice => Resource.ErrorPrice;
+
+        public static string ErrorName => Resource.ErrorName;
+
+        public static string ErrorPriceZero => Resource.ErrorPriceZero;
     }
 }

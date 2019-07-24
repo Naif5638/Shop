@@ -70,6 +70,15 @@ namespace Shop.UIForms.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -102,6 +111,51 @@ namespace Shop.UIForms.Resources {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a product name..
+        /// </summary>
+        public static string ErrorName {
+            get {
+                return ResourceManager.GetString("ErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a product price..
+        /// </summary>
+        public static string ErrorPrice {
+            get {
+                return ResourceManager.GetString("ErrorPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The price must be a number greather than zero.
+        /// </summary>
+        public static string ErrorPriceZero {
+            get {
+                return ResourceManager.GetString("ErrorPriceZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Camera.
+        /// </summary>
+        public static string FromCamera {
+            get {
+                return ResourceManager.GetString("FromCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Gallery.
+        /// </summary>
+        public static string FromGallery {
+            get {
+                return ResourceManager.GetString("FromGallery", resourceCulture);
             }
         }
         
@@ -156,6 +210,15 @@ namespace Shop.UIForms.Resources {
         public static string RememberDevice {
             get {
                 return ResourceManager.GetString("RememberDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where do you take the picture?.
+        /// </summary>
+        public static string TakePhoto {
+            get {
+                return ResourceManager.GetString("TakePhoto", resourceCulture);
             }
         }
     }

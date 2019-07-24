@@ -150,4 +150,25 @@
   <data name="Login" xml:space="preserve">
     <value>Logon:</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>Você consegue entender?</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>Da Galeria</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>Da Câmera</value>
+  </data>
+  <data name="ErrorPrice" xml:space="preserve">
+    <value>Você deve inserir um preço do produto.</value>
+  </data>
+  <data name="ErrorName" xml:space="preserve">
+    <value>Você deve digitar um nome.</value>
+  </data>
+  <data name="ErrorPriceZero" xml:space="preserve">
+    <value>O preço deve ser um número maior que zero!</value>
+  </data>
 </root>

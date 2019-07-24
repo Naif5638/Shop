@@ -150,4 +150,25 @@
   <data name="RememberDevice" xml:space="preserve">
     <value>Remember me in this device</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>Where do you take the picture?</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>From Gallery</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>From Camera</value>
+  </data>
+  <data name="ErrorPrice" xml:space="preserve">
+    <value>You must enter a product price.</value>
+  </data>
+  <data name="ErrorName" xml:space="preserve">
+    <value>You must enter a product name.</value>
+  </data>
+  <data name="ErrorPriceZero" xml:space="preserve">
+    <value>The price must be a number greather than zero</value>
+  </data>
 </root>

@@ -150,4 +150,25 @@
   <data name="Login" xml:space="preserve">
     <value>Inicio de sesión</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>¿Dónde tomas la foto?</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>Elegir de galería</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>Tomar con la cámara</value>
+  </data>
+  <data name="ErrorPrice" xml:space="preserve">
+    <value>Debe introducir un precio</value>
+  </data>
+  <data name="ErrorName" xml:space="preserve">
+    <value>Debe introducir un nombre.</value>
+  </data>
+  <data name="ErrorPriceZero" xml:space="preserve">
+    <value>¡El precio debe ser un número mayor a cero!</value>
+  </data>
 </root>
