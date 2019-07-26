@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Shop.Common.Helpers;
 using Shop.Common.Models;
 using Shop.Common.Services;
+using Shop.UIForms.Helpers;
 using Xamarin.Forms;
 
 namespace Shop.UIForms.ViewModels
@@ -14,6 +18,8 @@ namespace Shop.UIForms.ViewModels
         private bool isRunning;
         private bool isEnabled;
         private readonly ApiService apiService;
+        private MediaFile file;
+        private ImageSource imageSource;
 
         public Product Product { get; set; }
 
@@ -29,15 +35,24 @@ namespace Shop.UIForms.ViewModels
             set => this.SetValue(ref this.isEnabled, value);
         }
 
+        public ImageSource ImageSource
+        {
+            get => this.imageSource;
+            set => this.SetValue(ref this.imageSource, value);
+        }
+
         public ICommand SaveCommand => new RelayCommand(this.Save);
 
         public ICommand DeleteCommand => new RelayCommand(this.Delete);
+
+        public ICommand ChangeImageCommand => new RelayCommand(this.ChangeImage);
 
         //Constructor de la Clase
         public EditProductViewModel(Product product)
         {
             this.Product = product;
             this.apiService = new ApiService();
+            this.ImageSource = product.ImageFullPath;
             this.IsEnabled = true;
         }
 
@@ -63,6 +78,14 @@ namespace Shop.UIForms.ViewModels
 
             this.IsRunning = true;
             this.IsEnabled = false;
+
+            byte[] imageArray = null;
+            if (this.file != null)
+            {
+                imageArray = FilesHelper.ReadFully(this.file.GetStream());
+            }
+
+            Product.ImageArray = imageArray;
 
             var url = Application.Current.Resources["UrlAPI"].ToString();
 
@@ -134,6 +157,49 @@ namespace Shop.UIForms.ViewModels
 
             MainViewModel.GetInstance().Products.DeleteProductInList(this.Product.Id);
             await App.Navigator.PopAsync();
+        }
+
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.TakePhoto,
+                Languages.Cancel,
+                null,
+                Languages.FromGallery,
+                Languages.FromCamera);
+
+            if (source == Languages.Cancel)
+            {
+                this.file = null;
+                return;
+            }
+
+            if (source == Languages.FromCamera)
+            {
+                this.file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Pictures",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
         }
     }
 }
