@@ -171,4 +171,7 @@
   <data name="ErrorPriceZero" xml:space="preserve">
     <value>Le prix doit être supérieur à zéro!</value>
   </data>
+  <data name="RegisterNewUser" xml:space="preserve">
+    <value>Nouvel utilisateur</value>
+  </data>
 </root>

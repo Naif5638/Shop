@@ -49,5 +49,7 @@ namespace Shop.UIForms.Helpers
         public static string ErrorName => Resource.ErrorName;
 
         public static string ErrorPriceZero => Resource.ErrorPriceZero;
+
+        public static string RegisterNewUser => Resource.RegisterNewUser;
     }
 }
