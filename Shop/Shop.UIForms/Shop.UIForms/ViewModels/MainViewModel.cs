@@ -32,6 +32,8 @@ namespace Shop.UIForms.ViewModels
 
         public RegisterViewModel Register { get; set; }
 
+        public RememberPasswordViewModel RememberPassword { get; set; }
+
         public ICommand AddProductCommand => new RelayCommand(this.GoAddProduct);
 
 
