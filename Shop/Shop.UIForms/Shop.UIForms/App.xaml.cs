@@ -23,11 +23,14 @@ namespace Shop.UIForms
                 //INFO: Se deserializa a tipo json el string almacenado en settings en la constante token
                 var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
+                var user = JsonConvert.DeserializeObject<User>(Settings.User);
+
                 //INFO: Se verifica que la fecha de expiracion del token sea mayor a la fecha actual
                 if (token.Expiration > DateTime.Now)
                 {
                     var mainViewModel = MainViewModel.GetInstance();
                     mainViewModel.Token = token;
+                    mainViewModel.User = user;
                     mainViewModel.UserEmail = Settings.UserEmail;
                     mainViewModel.UserPassword = Settings.UserPassword;
                     mainViewModel.Products = new ProductsViewModel();

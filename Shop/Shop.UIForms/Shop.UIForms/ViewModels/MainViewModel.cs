@@ -10,13 +10,15 @@ using Shop.UIForms.Views;
 
 namespace Shop.UIForms.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
         public string UserEmail { get; set; }
 
         public string UserPassword { get; set; }
 
         private static MainViewModel instance;
+
+        private User user;
 
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
 
@@ -34,7 +36,17 @@ namespace Shop.UIForms.ViewModels
 
         public RememberPasswordViewModel RememberPassword { get; set; }
 
+        public ProfileViewModel Profile { get; set; }
+
         public ICommand AddProductCommand => new RelayCommand(this.GoAddProduct);
+
+        //public User User { get; set; }
+
+        public User User
+        {
+            get => this.user;
+            set => this.SetValue(ref this.user, value);
+        }
 
 
         public MainViewModel()
@@ -62,6 +74,13 @@ namespace Shop.UIForms.ViewModels
 
                 new Menu
                 {
+                    Icon = "ic_face",
+                    PageName = "ProfilePage",
+                    Title = "Modify User"
+                },
+
+                new Menu
+                {
                     Icon = "ic_phonelink_setup",
                     PageName = "SetupPage",
                     Title = "Setup"
@@ -77,11 +96,11 @@ namespace Shop.UIForms.ViewModels
 
             this.Menus = new ObservableCollection<MenuItemViewModel>(
                 menus.Select(m => new MenuItemViewModel
-            {
-                Icon = m.Icon,
-                PageName = m.PageName,
-                Title = m.Title
-            }).ToList());
+                {
+                    Icon = m.Icon,
+                    PageName = m.PageName,
+                    Title = m.Title
+                }).ToList());
         }
 
 

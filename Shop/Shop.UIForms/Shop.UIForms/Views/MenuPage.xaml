@@ -12,6 +12,12 @@
             	HeightRequest="150"
             	Source="shop">
             </Image>
+            <Label
+	            FontSize="Medium"
+	            Text="{Binding User.FullName, StringFormat='Welcome: {0}'}"
+	            TextColor="White">
+            </Label>
+
             <ListView
             	ItemsSource="{Binding Menus}"
             	HasUnevenRows="True"

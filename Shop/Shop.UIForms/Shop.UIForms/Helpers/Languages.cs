@@ -51,5 +51,7 @@ namespace Shop.UIForms.Helpers
         public static string ErrorPriceZero => Resource.ErrorPriceZero;
 
         public static string RegisterNewUser => Resource.RegisterNewUser;
+
+        public static string ForgotPassword => Resource.ForgotPassword;
     }
 }

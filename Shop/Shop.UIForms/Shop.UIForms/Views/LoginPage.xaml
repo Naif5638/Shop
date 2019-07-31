@@ -48,22 +48,23 @@
                     </Switch>                    
                 </StackLayout>
                 
-                <ActivityIndicator
-                	IsRunning="{Binding IsRunning}"
-                    VerticalOptions="CenterAndExpand">
-                </ActivityIndicator>
-                
                 <StackLayout>
                     <Label
 	                    HorizontalOptions="Center"
-	                    Text="Forgot my password"
-	                    TextColor="Navy">
+	                    Text="{i18n:Translate ForgotPassword}"
+	                    TextColor="Navy"
+                        FontSize="Medium">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding RememberPasswordCommand }"/>
                         </Label.GestureRecognizers>
                     </Label>
-                </StackLayout>               
+                </StackLayout>
                 
+                <ActivityIndicator
+                	IsRunning="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
+
                 <StackLayout
 	                Orientation="Horizontal">
                     <Button
@@ -75,8 +76,10 @@
     	                IsEnabled="{Binding IsEnabled}"
     	                Text="{i18n:Translate Login}"
     	                TextColor="White">
-                     </Button>
-                                        
+                    </Button>
+                </StackLayout>
+
+                <StackLayout>
                     <Button
     	                BackgroundColor="Purple"
     	                BorderRadius="23"
@@ -88,6 +91,7 @@
     	                TextColor="White">
                     </Button>
                 </StackLayout>
+               
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
