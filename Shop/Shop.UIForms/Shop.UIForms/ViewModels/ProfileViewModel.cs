@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Shop.Common.Helpers;
 using Shop.Common.Models;
 using Shop.Common.Services;
+using Shop.UIForms.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -80,6 +81,8 @@ namespace Shop.UIForms.ViewModels
         }
 
         public ICommand SaveCommand => new RelayCommand(this.Save);
+
+        public ICommand ModifyPasswordCommand => new RelayCommand(this.ModifyPassword);
 
         private async void Save()
         {
@@ -214,6 +217,12 @@ namespace Shop.UIForms.ViewModels
                     return;
                 }
             }
+        }
+
+        private async void ModifyPassword()
+        {
+            MainViewModel.GetInstance().ChangePassword = new ChangePasswordViewModel();
+            await App.Navigator.PushAsync(new ChangePasswordPage());
         }
     }
 

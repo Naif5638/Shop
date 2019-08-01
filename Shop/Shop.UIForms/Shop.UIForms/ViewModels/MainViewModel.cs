@@ -38,6 +38,8 @@ namespace Shop.UIForms.ViewModels
 
         public ProfileViewModel Profile { get; set; }
 
+        public ChangePasswordViewModel ChangePassword { get; set; }
+
         public ICommand AddProductCommand => new RelayCommand(this.GoAddProduct);
 
         //public User User { get; set; }
@@ -65,25 +67,25 @@ namespace Shop.UIForms.ViewModels
         {
             var menus = new List<Menu>
             {
-                new Menu
+                 new Menu
                 {
-                    Icon = "ic_info_outline",
-                    PageName = "AboutPage",
-                    Title = "About"
-                },
-
-                new Menu
-                {
-                    Icon = "ic_face",
+                    Icon = "ic_person",
                     PageName = "ProfilePage",
                     Title = "Modify User"
                 },
-
+                
                 new Menu
                 {
                     Icon = "ic_phonelink_setup",
                     PageName = "SetupPage",
                     Title = "Setup"
+                },
+
+                new Menu
+                {
+                    Icon = "ic_info_outline",
+                    PageName = "AboutPage",
+                    Title = "About"
                 },
 
                 new Menu
